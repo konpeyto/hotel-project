@@ -1,0 +1,14 @@
+<div layout:decorate="layout">
+    <div layout:fragment="contents">
+        <h1 th:text="${title}"></h1>
+        <div th:object="${reserve}">
+            <p>ID：<span th:text="*{id}"></span></p>
+            <p>名前：<span th:text="*{name}"></span></p>
+            <p>メールアドレス：<span th:text="*{mail}"></span></p>
+            <p>チェックイン日：<span th:text="*{#dates.format(startDate, 'yyyy/MM/dd')}"></span></p>
+            <p>チェックアウト日：<span th:text="*{#dates.format(endDate, 'yyyy/MM/dd')}"></span></p>
+            <p>人数：<span th:text="*{member}"></span></p>
+            <a class="btn btn-link" th:href="@{/hotels/{hotel_id}(hotel_id=*{hotel.id})}">一覧画面へ</a>
+        </div>
+    </div>
+</div>
