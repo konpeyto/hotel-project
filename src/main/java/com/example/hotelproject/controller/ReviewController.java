@@ -47,10 +47,11 @@ public class ReviewController {
     }
 
     @PostMapping
-    public String create(@PathVariable Long hotel_id, @ModelAttribute Review review) {
+    public String create(@PathVariable Long hotel_id, @ModelAttribute Review review, Review ratingAverage) {
         Hotel hotel = hotelRepository.findById(hotel_id).orElse(null);
         review.setHotel(hotel);
         reviewRepository.save(review);
+        reviewRepository.save(ratingAverage);
         return"redirect:/hotels/{hotel_id}/reviews";
 
     }

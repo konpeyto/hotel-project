@@ -1,5 +1,7 @@
 package com.example.hotelproject.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,35 +18,51 @@ public class Review {
     private Long id;
     private String name;
     private Long rating;
+    private double ratingAverage;
     private String body;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-
+    
     public Long getId() {
         return id;
     }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public Long getRating() {
         return rating;
     }
-
+    
     public void setRating(Long rating) {
         this.rating = rating;
     }
+
+    public double getRatingAverage() {
+        return ratingAverage;
+    }
+
+    public void setRatingAverage(double ratingAverage, List<Review> reviews){
+        int size = reviews.size();
+        double total = 0;
+        for (int i = 0; i >= size; i++){
+            total += reviews.get(i).getRatingAverage();
+        }
+
+        ratingAverage = total/size;
+    }
+    
 
     public String getBody() {
         return body;
