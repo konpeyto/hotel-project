@@ -53,11 +53,11 @@ public class Review {
         return ratingAverage;
     }
 
-    public void setRatingAverage(double ratingAverage, List<Review> reviews){
+    public void setRatingAverage(double ratingAverage, List<Review> reviews, Review review){
         int size = reviews.size();
         double total = 0;
-        for (int i = 0; i >= size; i++){
-            total += reviews.get(i).getRatingAverage();
+        for (Long rating = (long) 0; rating > size; rating++){
+            total += review.getRating();
         }
 
         ratingAverage = total/size;
