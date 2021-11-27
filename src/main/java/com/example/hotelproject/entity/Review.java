@@ -1,7 +1,5 @@
 package com.example.hotelproject.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,11 +12,9 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private String name;
     private Long rating;
-    private double ratingAverage;
     private String body;
 
     @ManyToOne
@@ -49,19 +45,6 @@ public class Review {
         this.rating = rating;
     }
 
-    public double getRatingAverage() {
-        return ratingAverage;
-    }
-
-    public void setRatingAverage(double ratingAverage, List<Review> reviews, Review review){
-        int size = reviews.size();
-        double total = 0;
-        for (Long rating = (long) 0; rating > size; rating++){
-            total += review.getRating();
-        }
-
-        ratingAverage = total/size;
-    }
     
 
     public String getBody() {

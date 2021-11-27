@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.util.List;
 
 import com.cloudinary.Transformation;
 import com.example.hotelproject.config.Singleton;
@@ -19,6 +20,7 @@ public class Hotel {
     private long id;
     private String name;
     private String description;
+    private double ratingAverage;
 
     @OneToOne(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Photo photo;
@@ -71,5 +73,20 @@ public class Hotel {
         ).generate(photo.getUpload().getPublicId());
     }
 
-    
+    public double getRatingAverage() {
+        return ratingAverage;
+    }
+
+    public void setRatingAverage(List<Review> reviews){
+        int size = reviews.size();
+        double total = 0;
+        for (Review review: reviews){
+            total += review.getRating();
+        }
+        //for (int i = 0; i < size; i++){
+        //    total += reviews.get(i).getRating();
+        //}
+
+        this.ratingAverage = total/size;
+    }
 }
